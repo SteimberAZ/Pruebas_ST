@@ -5,15 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./style.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+<body class="overflow-hidden p-4  gap-2.5 bg-red-100 min-h-screen  flex  flex-col items-center justify-center min-w-screen">
+   <div class=" p-2 rounded-[100px] flex flex-col items-center-safe justify-center  w-[170px] sm:w-[180px] md:w-[250px] lg:w-[300px] h-auto bg-white shadow-blue-50 transition-all duration-500 ease-in-out animate-bounce">
+    <img src="tail.png" class="  rounded-[100px] h-auto w-[150px] sm:w-[100px] md:w-[150px] lg:w-[200px]">
+   </div>
+  <div class=" px-2 rounded-2xl flex flex-col items-center-safe justify-center sm:w-[600px] md:w-[800px] lg:w-[1000px] h-40 bg-amber-50">
+    <h1 class="text-4xl font-bold text-blue-600 mb-4">¡Hola, Tailwind CSS!</h1>
 
-  <h1 class="text-4xl font-bold text-blue-600 mb-4">¡Hola, Tailwind CSS!</h1>
+    <p class="text-gray-700 text-lg mb-6">Este es un ejemplo básico con Tailwind.</p>
 
-  <p class="text-gray-700 text-lg mb-6">Este es un ejemplo básico con Tailwind.</p>
+    <button class="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-600 transition">
+      Click aquí
+    </button>
+  </div>
+ <div class="px-2 overflow-x-auto overflow-y-hidden rounded-2xl flex flex-row items-center gap-1.5 justify-evenly h-52 bg-amber-50 sm:w-[600px] md:w-[800px] lg:w-[1000px]">
+  <div class="bg-gradient-to-l from-blue-800 to-blue-400  h-32 rounded-3xl min-w-[5rem] animate-bounce"></div>
+  <div class="bg-gradient-to-l from-blue-800 to-blue-400  h-32 rounded-3xl min-w-[5rem] animate-ping"></div>
+  <div class="bg-gradient-to-l from-blue-800 to-blue-400  h-32 rounded-3xl min-w-[5rem] animate-pulse"></div>
+  <div class="bg-gradient-to-l from-blue-800 to-blue-400 h-32 rounded-3xl min-w-[5rem] animate-spin"></div>
 
-  <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">
-    Click aquí
-  </button>
+</div>
+
 
 </body>
 </html>
