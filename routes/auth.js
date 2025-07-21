@@ -19,7 +19,8 @@ router.post('/login', (req, res) => {
     return res.status(401).send('Contraseña incorrecta');
   }
 
-    res.send('Inicio de sesión exitoso');
+    
+    return res.redirect('/dist/main.html');
   });
 });
 

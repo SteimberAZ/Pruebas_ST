@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 app.use('/dist', express.static('dist'));
 
 
+
 // Conexión a la base de datos
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
