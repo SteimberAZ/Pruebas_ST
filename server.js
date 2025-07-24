@@ -39,5 +39,5 @@ app.use('/auth', authRoutes);
 
 // Iniciar el servidor
 app.listen(process.env.PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${process.env.PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${process.env.PORT}`);
 });
