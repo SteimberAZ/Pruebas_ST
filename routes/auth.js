@@ -2,6 +2,13 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
+// REDIRIGIR AL LOGIN
+router.post('/relogin', (req, res) => {
+
+  return res.redirect('/dist/login.html');
+  
+});
+
 // LOGIN
 router.post('/login', (req, res) => {
   const { user, contrasena } = req.body;
