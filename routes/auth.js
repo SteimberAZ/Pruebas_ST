@@ -9,6 +9,13 @@ router.post('/relogin', (req, res) => {
   
 });
 
+// REDIRIGIR AL INDEX
+router.post('/reindex', (req, res) => {
+
+  return res.redirect('/dist/index.html');
+  
+});
+
 // LOGIN
 router.post('/login', (req, res) => {
   const { user, contrasena } = req.body;
