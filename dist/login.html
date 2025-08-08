@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/imgs/style.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background: black;" class="overflow-x-hidden p-4 sm:flex-row  min-h-screen  flex  
+flex-col items-center justify-center min-w-screen ">
+<div class="sm:block flex-col items-center justify-center  
+   sm:w-[600px]   h-auto shadow-blue-50 transition-all duration-50 ease-out animate-pulse">
+  <img src="/dist/imgs/logoCom.png" id="miImagen" class="h-auto w-[350px] sm:w-[550px] md:w-[600px] hidden sm:block animate-pulse">
+  <img src="/dist/imgs/logoBillar.png" id="miImagen" class="h-auto w-[150px] sm:w-[150px] block sm:hidden animate-pulse">
+</div>
+
+  <div class="  bg-white p-4 rounded-2xl flex flex-col items-center justify-center 
+  w-80 sm:w-[300px] md:w-[400px] lg:w-[400px] h-100">
+
+    <form class=" flex flex-col items-center justify-center 
+    " action="/auth/login" method="post">
+
+      <label for="user">Usuario</label><br>
+      <input  class="p-2  border-black border-2  rounded-[5px] hover:bg-gray-100 
+      w-70" type="text" id="user" name="user" required placeholder="..."><br><br>
+
+      <label for="contrasena">Contraseña</label><br>
+      <input class="p-2 border-black  rounded-[5px] hover:bg-gray-100 justify-center items-center
+        w-70 border-2" type="password" id="contrasena" name="contrasena" required placeholder="..."><br><br>
+      <button class="px-4 py-2 bg-black rounded hover:bg-gray-600 transition" type="submit">
+       <a class="text-white"> Iniciar Sesión</a>
+      </button>
+    </form>
+
+    
+  </div>
+
+
+</body>
+
+</html>

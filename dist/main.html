@@ -4,17 +4,174 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/dist/style.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="overflow-hidden p-4 pt-[60px] min-h-screen min-w-screen bg-white flex justify-center items-center">
-    <header class="fixed top-0 left-0 w-full z-50" style="background: linear-gradient(10deg, #d3a3fe, #ade8f8);">
-        <div class="container mx-auto flex justify-between items-center px-2 w-full h-[auto] sm:px-25">
-            <img src="/dist/imgs/logoCom.png" class="h-auto w-[350px]">
+<body class="overflow-x-hidden p-4 pt-[110px] min-h-screen min-w-screen bg-white flex justify-center items-center">
+    <header class="fixed top-0 left-0 w-full z-50 p-2" style="background: black">
+        <div class="container mx-auto flex  justify-center sm:justify-between items-center px-2 w-full h-[auto] sm:px-25">
+            <img src="/dist/imgs/logoCom.png" class="h-auto w-[200px] animate-pulse ">
+            <form class=" flex flex-col items-center justify-center  bg-black h-auto m-1 w-auto "
+             action="/auth/reindex" method="post">
+            <button class="px-4 py-2 bg-red-500 rounded hover:bg-red-700 transition m-2 w-[80px]  sm:w-[100px] h-[50px]"  type="submit">
+            <a class="text-white font-bold">Salir</a>
+            </button>
+            </form>
         </div>
     </header>
-    
-    <img src="/dist/imgs/xd.png" class="h-auto w-[500px]">
-    
-    <img src="/dist/imgs/xd.png" class="h-auto w-[500px]">
-    
+<div class="bg-white shadow-[0_0_10px_0_rgba(0,0,0,0.25)] flex flex-col justify-center items-center p-4 w-full max-w-screen sm:max-w-[500px] md:max-w-[800px] h-auto rounded-2xl">
+  
+  <h1 class="text-black font-bold text-center mb-2">MESAS EN USO</h1>
+
+  <div class="flex overflow-x-auto w-full p-4 gap-4">
+    <div id="expul"class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 1</p>
+            <p class="text-red-500 font-bold ml-0.5">1:30-2:30</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <div class=" flex items-center justify-center ">
+                <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[100px]"  id="bexpulsar"  >
+                <a class="text-white font-bold text-1">Expulsar</a>
+                </button>
+            </div>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 2</p>
+            <p class="text-red-500 font-bold ml-0.5">1:00-2:00</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+            >
+            <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[100px]" id="bexpulsar" >
+            <a class="text-white font-bold text-1">Expulsar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 3</p>
+            <p class="text-red-500 font-bold ml-0.5">1:15-2:15</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+              >
+            <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[100px]" id="bexpulsar" >
+            <a class="text-white font-bold text-1">Expulsar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 4</p>
+            <p class="text-red-500 font-bold ml-0.5">1:30-2:00</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+             >
+            <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[100px]" id="bexpulsar">
+            <a class="text-white font-bold text-1">Expulsar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+  </div>
+
+  <h1 class="text-black font-bold text-center mt-4 mb-2">MESAS LISTAS PARA PAGAR</h1>
+
+  <div class="flex overflow-x-auto w-full p-4 gap-4">
+    <div id="pag" class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 11</p>
+            <p class="text-green-500 font-bold ml-0.5">10:30-11:30</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <div class=" flex items-center justify-center ">
+                <button id="bpagar" class=" bg-green-500 rounded hover:bg-green-700 transition w-[100px]" >
+                <a class="text-white font-bold text-1">Confirmar</a>
+                </button>
+            </div>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 13</p>
+            <p class="text-green-500 font-bold ml-0.5">11:30-12:00</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+             >
+            <button class=" bg-green-500 rounded hover:bg-green-700 transition w-[100px]"  >
+            <a class="text-white font-bold text-1">Confirmar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 9</p>
+            <p class="text-green-500 font-bold ml-0.5">11:30-12:30</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+             >
+            <button class=" bg-green-500 rounded hover:bg-green-700 transition w-[100px]"  >
+            <a class="text-white font-bold text-1">Confirmar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+    <div class="w-48 h-32 flex-shrink-0 rounded-2xl overflow-hidden">
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 gap-1 bg-black">
+            <p class="text-white font-bold ml-0.5">Mesa 14</p>
+            <p class="text-green-500 font-bold ml-0.5">11:15-12:15</p>
+      </div>
+      <div class="relative top-0 left-0 w-full h-auto flex items-center justify-center z-10 p-1 bg-black">
+            <form class=" flex items-center justify-center "
+            >
+            <button class=" bg-green-500 rounded hover:bg-green-700 transition w-[100px]" >
+            <a class="text-white font-bold text-1">Confirmar</a>
+            </button>
+            </form>
+      </div>
+      <img src="/dist/imgs/Stock.jpg" class="w-full h-full object-cover" />
+    </div>
+  </div>
+
+</div>
+<div id="modal" class="absolute top-0 left-0 w-screen h-screen hidden flex items-center justify-center z-10 p-1 bg-black bg-opacity-50">
+    <div  id="modalContent"class="transform  transition-all duration-300 scale-10 opacity-0 bg-white flex flex-col items-center justify-center w-auto h-auto gap-4 p-8 rounded-2xl">
+        <p class="text-black font-bold text-3xl text-center">¿ESTAS SEGURO DE EXPULSAR <br>A LA MESA 1?</p>
+        <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[200px] h-[50px]"   id="noexpulsar" >
+            <a class="text-white font-bold text-2xl">Cancelar</a>
+        </button>
+        <button class=" bg-green-500 rounded hover:bg-green-700 transition w-[200px] h-[50px]"   id="expulsar" >
+            <a class="text-white font-bold text-2xl">Confirmar</a>
+        </button>
+    </div>
+</div>
+ 
+<div id="modal2" class="absolute top-0 left-0 w-screen h-screen hidden flex items-center justify-center z-10 p-1 bg-black bg-opacity-50">
+    <div  id="modalContent2"class="transform  transition-all duration-300 scale-10 opacity-0 bg-white flex flex-col items-center justify-center w-auto h-auto gap-4 p-8 rounded-2xl">
+        <p class="text-black font-bold text-3xl text-center">¿ESTAS SEGURO DE COMFIRMAR <br>EL PAGO A LA MESA 11?</p>
+        <button class=" bg-red-500 rounded hover:bg-red-700 transition w-[200px] h-[50px]"   id="nopagar" >
+            <a class="text-white font-bold text-2xl">Cancelar</a>
+        </button>
+        <button class=" bg-green-500 rounded hover:bg-green-700 transition w-[200px] h-[50px]"   id="pagar" >
+            <a class="text-white font-bold text-2xl">Confirmar</a>
+        </button>
+    </div>
+</div>
 </body>
+<script src="/dist/scripts.js"></script>
 </html>
