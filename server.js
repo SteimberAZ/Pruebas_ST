@@ -18,21 +18,8 @@ app.use('/dist', express.static('dist'));
 
 
 
-// Conexión a la base de datos
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('✅ Conectado a la base de datos MySQL');
-});
 
 // Hacer disponible la conexión
-app.set('db', db);
 
 // Rutas
 app.use('/auth', authRoutes);
