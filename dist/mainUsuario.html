@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa del Salón de Billar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="icon" href="/dist/imgs/logo.ico" type="image/x-icon">
+    <style>
+        :root {
+            --ball-size: 85px; 
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            display: flex;
+            flex-direction: column; 
+            padding-top: 100px;
+        }
+
+        header {
+            background-color: #000000;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            text-align: center;
+            border-bottom: 2px solid #FFFFFF;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        main {
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        #mapa-container {
+            position: relative;
+            width: 800px;
+            height: 700px;
+            border: 2px solid #FFFFFF;
+            background-color: #FAFAFA;
+            transition: transform 0.5s ease-in-out;
+            flex-shrink: 0; 
+        }
+        
+        .bloque {
+            fill: #E0E0E0;
+            stroke: #000000;
+            stroke-width: 2;
+            cursor: pointer;
+            transition: fill 0.3s;
+        }
+        .bloque:hover {
+            fill: #BDBDBD;
+        }
+        .texto-bloque {
+            font-size: 32px;
+            font-weight: bold;
+            fill: #000000;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+        
+        .mesas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;  
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 50px;
+            box-sizing: border-box;
+            pointer-events: none;  
+        }
+        
+        .mesa {
+            width: var(--ball-size);
+            height: var(--ball-size);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: box-shadow 0.3s, transform 0.3s;
+            pointer-events: all;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            border: 1px solid rgba(0,0,0,0.3);
+        }
+        .mesa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+        .numero-bola {
+            width: 40%;
+            height: 40%;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+            font-size: calc(var(--ball-size) * 0.25);
+            font-weight: bold;
+        }
+        
+        .ball-1 { background-color: #ffc107; } 
+        .ball-2 { background-color: #03a9f4; } 
+        .ball-3 { background-color: #f44336; } 
+        .ball-4 { background-color: #9c27b0; } 
+        .ball-5 { background-color: #ff9800; } 
+        .ball-6 { background-color: #4caf50; } 
+
+        #mapa-container.zoomed {
+            transform: scale(1.4);
+        }
+
+        #modal-cedula {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); display: none;
+            justify-content: center; align-items: center; z-index: 1000;
+        }
+        #modal-content {
+            background-color: white; color: black; padding: 30px 40px;
+            border-radius: 8px; border: 2px solid #000; text-align: center;
+        }
+        #modal-content label { display: block; margin-bottom: 15px; font-size: 1.2em; font-weight: bold; }
+        #modal-content input {
+            width: 100%; padding: 12px; border: 2px solid #333;
+            border-radius: 4px; font-size: 1.1em; margin-bottom: 20px; text-align: center;
+        }
+        #modal-content button {
+            padding: 12px 24px; border: 2px solid #000; border-radius: 4px;
+            cursor: pointer; font-size: 1em; font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        #btn-aceptar { background-color: #000000; color: #FFFFFF; margin-right: 10px; }
+        #btn-aceptar:hover { background-color: #333; }
+        #btn-cancelar { background-color: #FFFFFF; color: #000000; }
+        #btn-cancelar:hover { background-color: #E0E0E0; }
+        #btn-back {
+            position: absolute;
+            top: 500px;
+            left: 0px;
+            background-color: red;
+            color: #fff;
+            padding: 10px 28px;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            z-index: 20;
+            transition: background-color 0.3s;
+        }
+        #btn-back:hover {
+            background-color: #333;
+        }
+        #btn-back-z {
+            position: absolute;
+            top: 200px;
+            left: 0px;
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            padding: 10px 28px;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            z-index: 20;
+            transition: background-color 0.3s;
+        }
+        #btn-back-z:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="fixed top-0 left-0 w-full z-50 p-2" style="background: black">
+        <div class="container mx-auto flex  justify-center sm:justify-between items-center px-2 w-full h-[auto] sm:px-25">
+            <img src="/dist/imgs/logoCom.png" class="h-auto w-[200px] animate-pulse ">
+            <form class=" flex flex-col items-center justify-center  bg-black h-auto m-1 w-auto "
+             action="/auth/reindex" method="post">
+            <button class="px-4 py-2 bg-red-500 rounded hover:bg-red-700 transition m-2 w-[80px]  sm:w-[100px] h-[50px]"  type="submit">
+            <a class="text-white font-bold">Salir</a>
+            </button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <div id="mapa-container">
+            <svg id="mapa-svg" width="100%" height="100%" viewBox="0 0 800 600">
+                <rect id="zona-1" class="bloque" x="50" y="60" width="700" height="200" rx="15"></rect>
+                <text class="texto-bloque" id="textobloques" x="400" y="165">Zona 1</text>
+
+                <rect id="zona-2" class="bloque" x="50" y="340" width="700" height="200" rx="15"></rect>
+                <text class="texto-bloque"  id="textobloques2" x="400" y="445">Zona 2</text>
+            </svg>
+
+            <div id="mesas-zona-1" class="mesas-container"></div>
+            <div id="mesas-zona-2" class="mesas-container"></div>
+            <div id="btn-back" style="display:none;">
+                Atrás
+            </div>
+            <div id="btn-back-z" style="display:none;">
+                Zona 0
+            </div>
+        </div>
+    </main>
+    
+    <div id="modal-cedula">
+        <div id="modal-content">
+            <label for="input-cedula">Asignar jugador a la mesa</label>
+            <input type="text" id="input-cedula" placeholder="Cédula del jugador principal">
+
+            <form action="/auth/recrono" method="post">
+                <button id="btn-aceptar" type="submit">Aceptar</button>
+                <button id="btn-cancelar" type="button">Cancelar</button>
+            </form>
+            
+            
+        </div>
+    </div>
+
+  <script>
+
+    const mapaContainer = document.getElementById('mapa-container');
+    const bloques = document.querySelectorAll('.bloque');
+    const modal = document.getElementById('modal-cedula');
+    const inputCedula = document.getElementById('input-cedula');
+    const btnCancelar = document.getElementById('btn-cancelar');
+    const btnAceptar = document.getElementById('btn-aceptar');
+    const btnBack = document.getElementById('btn-back');
+    const btnBackz = document.getElementById('btn-back-z');
+    const zona1 = document.getElementById('zona-1');
+    const zona2 = document.getElementById('zona-2');
+    
+    const text = document.getElementById('textobloques');
+    const text2 = document.getElementById('textobloques2');
+    let mesaSeleccionada = null; 
+
+    function generarMesas(containerId, prefijoZona, numMesas = 6) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';  
+        for (let i = 1; i <= numMesas; i++) {
+            const mesa = document.createElement('div');
+            mesa.classList.add('mesa', `ball-${i}`);
+            mesa.dataset.mesaId = `${prefijoZona}-${i}`;
+            
+            const numeroSpan = document.createElement('span');
+            numeroSpan.classList.add('numero-bola');
+            numeroSpan.textContent = i;
+            
+            mesa.appendChild(numeroSpan);
+
+            mesa.addEventListener('click', () => {
+                mesaSeleccionada = mesa.dataset.mesaId;
+                document.querySelector('#modal-content label').textContent = `Asignar jugador a la mesa ${mesaSeleccionada}`;
+                modal.style.display = 'flex';
+                inputCedula.focus();  
+            });
+            container.appendChild(mesa);
+        }
+    }
+    
+    generarMesas('mesas-zona-1', 'Z1');
+    generarMesas('mesas-zona-2', 'Z2');
+    zona1.addEventListener('click', (event) => {
+            btnBackz.textContent = 'Zona 1'
+    });
+    zona2.addEventListener('click', (event) => {
+            btnBackz.textContent = 'Zona 2'
+    });
+    bloques.forEach(bloque => {
+        bloque.addEventListener('click', (event) => {
+            const bloqueId = event.currentTarget.id;
+            document.querySelectorAll('.mesas-container').forEach(c => c.style.display = 'none');
+            mapaContainer.classList.add('zoomed');
+            const mesasContainerId = `mesas-${bloqueId}`;
+            const mesasContainer = document.getElementById(mesasContainerId);
+            if (mesasContainer) {
+                setTimeout(() => {
+                    mesasContainer.style.display = 'flex';
+                    zona2.style.display = 'none';
+                    zona1.style.display = 'none';
+                    text.textContent = '';
+                    text2.textContent = '';
+                    btnBack.style.display = 'block'; // mostrar botón atrás
+                    btnBackz.style.display = 'block'; // mostrar botón atrás
+                }, 300);
+            }
+        });
+    });
+
+    btnCancelar.addEventListener('click', () => {
+        modal.style.display = 'none';
+        inputCedula.value = '';
+    });
+
+
+
+
+    
+    btnBack.addEventListener('click', () => {
+        document.querySelectorAll('.mesas-container').forEach(c => c.style.display = 'none');
+        mapaContainer.classList.remove('zoomed');
+        btnBack.style.display = 'none'; // ocultar el botón
+        btnBackz.style.display = 'none'; // ocultar el botón
+        zona2.style.display = 'flex';
+        zona1.style.display = 'flex';
+        text.textContent = 'Zona 1';
+        text2.textContent = 'Zona 2';
+    });
+
+</script>
+
+</body>
+</html>

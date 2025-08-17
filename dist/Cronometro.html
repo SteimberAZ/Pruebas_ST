@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cronómetro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="icon" href="/dist/imgs/logo.ico" type="image/x-icon">
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-white border-4 border-black">
+
+  <!-- Número de mesa -->
+  <h1 class="absolute top-4 left-4 text-sm font-semibold">MESA #</h1>
+
+  <!-- Cronómetro -->
+  <div id="cronometro" class="text-6xl font-bold border-2 border-black px-6 py-4 rounded-lg mb-8">
+    60:00
+  </div>
+
+  <!-- Botón -->
+  <form action="/auth/ppago" method="post">
+  <button class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800" type="submit">
+    TERMINAR Y PROCEDER AL PAGO
+  </button>
+  </form>
+
+  <script>
+    let tiempo = 60 * 60; // 1 hora en segundos
+    const cronometro = document.getElementById("cronometro");
+
+    function actualizarTiempo() {
+      const minutos = String(Math.floor(tiempo / 60)).padStart(2, "0");
+      const segundos = String(tiempo % 60).padStart(2, "0");
+      cronometro.textContent = `${minutos}:${segundos}`;
+      
+      if (tiempo > 0) {
+        tiempo--;
+      } else {
+        clearInterval(intervalo);
+        cronometro.textContent = "00:00";
+      }
+    }
+
+    // Iniciar cronómetro
+    actualizarTiempo();
+    const intervalo = setInterval(actualizarTiempo, 1000);
+  </script>
+</body>
+</html>
